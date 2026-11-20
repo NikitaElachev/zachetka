@@ -24,6 +24,13 @@ def list_disciplines():
         return [row[0] for row in rows]
 
 
+@app.get("/api/disciplines/count")
+def count_disciplines():
+    with db() as conn:
+        count, = conn.execute("SELECT COUNT(*) FROM discipline").fetchone()
+    return {"count": count}
+
+
 @app.post("/api/disciplines")
 def add_discipline(name: str):
     with db() as conn:
