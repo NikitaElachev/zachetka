@@ -1,0 +1,20 @@
+services:
+  zachetka_db:
+    image: postgres:18
+    volumes:
+      - ./volume/db:/var/lib/postgresql
+    environment:
+      POSTGRES_DB: zachetka
+      POSTGRES_USER: zachetka
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    restart: unless-stopped
+
+  zachetka_api:
+    image: antonnest/zachetka:dev
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://zachetka:${DB_PASSWORD}@zachetka_db/zachetka
+    restart: unless-stopped
+    depends_on:
+      - zachetka_db
