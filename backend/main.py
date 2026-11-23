@@ -3,7 +3,7 @@ import os
 import psycopg
 from fastapi import FastAPI
 
-app = FastAPI(title="АС «Зачетка»")
+app = FastAPI(title="АС «Моя зачетка»")
 
 
 def db():
